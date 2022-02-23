@@ -692,6 +692,317 @@ public:
 ```
 
 
+### 14、二进制中1的个数
+
+题目链接：https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/
+
+C++:
+```C++
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int count = 0;
+        while(n){
+            count++;
+            n=(n-1)&n;
+        }
+        return count;
+    }
+};
+```
+Python:
+```Python
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        res=0
+        while n:
+            res+=1
+            n=(n-1)&n
+        return res
+```
+
+
+### 15、数值的整数次方
+
+题目链接：https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/
+
+C++:
+```C++
+class Solution {
+public:
+    double myPow(double x, int n) {
+      if(x==0.0) return 0.0;
+      if(n==-1) return 1/x;
+      if(n==0) return 1;
+      if(n==1) return x;
+
+      double res=myPow(x,n>>1);
+      res*=res;
+      if(n&0x1==1){
+         res *= x;
+      } 
+      return res;
+    }
+};
+```
+Python:
+```Python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if x==0.0: return 0.0
+        if n==-1: return 1/x
+        if n==0: return 1
+        if n==1: return x
+        res =self.myPow(x,n>>1)
+        res *= res
+        if n&0x1==1:
+            res *= x
+        return res
+```
+
+
+### 16、打印从1到最大的n位数
+
+题目链接：https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/
+
+C++:
+```C++
+
+class Solution{
+private:
+   vector<string> res;
+   string s;
+   char num[10]={'0','1','2','3','4','5','6','7','8','9'};
+
+   //生成长度为len的数，固定第x位
+   void dfs(int x, int len){
+       if(x==len){
+           res.push_back(s);
+           return;
+       }
+       //如果固定是第0位，表明是第1位，不能取0
+       int start = x==0 ? 1: 0;
+       for(int i=start;i<10;i++){
+           s.push_back(num[i]);
+           dfs(x+1,len);
+           s.pop_back();
+       }
+   }
+public:
+   vector<int> printNumbers(int n){
+       for(int i=1;i<=n;i++){
+           dfs(0,i);
+       }
+       
+       vector<int> ans;
+       for(int i=0;i<res.size();i++){
+           ans.push_back(stoi(res[i]));
+       }
+       return ans;
+   }
+
+};
+```
+
+
+### 17、删除链表的节点
+
+题目链接：https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/
+
+C++:
+```C++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteNode(ListNode* head, int val) {
+        if(head->val==val) return head->next;
+        ListNode *pre = head;
+        ListNode *cur = head->next;
+        while(cur!=nullptr && cur->val!=val){
+            pre=cur;
+            cur=cur->next;
+        }
+        if(cur!=nullptr){
+            pre->next=cur->next;
+        }
+        return head;
+
+    }
+};
+```
+Python:
+```Python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def deleteNode(self, head: ListNode, val: int) -> ListNode:
+        if head.val==val: return head.next
+        pre=head
+        cur=head.next
+        while cur!=None and cur.val!=val:
+            pre=cur
+            cur=cur.next
+        if cur!=None:
+            pre.next=cur.next
+        return head
+```
+
+
+### 18、表示数值的字符串
+
+题目链接：https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/
+
+C++:
+```C++
+class Solution {
+private:
+    int index = 0;
+    bool scanUnsignedInteger(string s){
+        int start = index;
+        while(index<s.size() && s[index]>='0' && s[index]<='9'){
+            index++;
+        }
+        return start<index;
+    }
+
+    bool scanInteger(string s){
+        if(index<s.size() && (s[index]=='+' || s[index]=='-')){
+            index++;
+        }
+        return scanUnsignedInteger(s);
+    }
+
+public:
+    bool isNumber(string s) {
+      // 首先去掉首尾空格
+      s.erase(0,s.find_first_not_of(" "));  
+      s.erase(s.find_last_not_of(" ") + 1);
+      
+
+      if(s.size()<1) return false;
+
+      bool numeric = scanInteger(s);
+
+      if(index<s.size() && s[index]=='.'){
+          index++;
+          numeric = scanUnsignedInteger(s) || numeric;
+      }
+
+      if(index<s.size() && (s[index]=='e' || s[index]=='E')){
+          index++;
+          numeric = numeric && scanInteger(s);
+      }
+
+      return numeric && index==s.size();
+    }
+};
+```
+Python:
+```python
+class Solution:
+    def isNumber(self, s: str) -> bool:
+       
+        s=s.strip() #去除首尾空格
+        if len(s)<1:return False
+
+        #判断整数的正负号
+        def scanInteger(s):
+            nonlocal index
+            if index<len(s) and (s[index]=='+' or s[index]=='-'):
+                index+=1
+            return scanUnsignedInteger(s)
+        
+        #判断整数数值部分
+        def scanUnsignedInteger(s):
+            nonlocal index
+            start = index
+            while index<len(s) and s[index]>='0' and s[index]<='9':
+                index+=1
+            return start<index
+
+        index = 0
+        numeric = scanInteger(s)
+        if index<len(s) and s[index]=='.':
+            index+=1
+            numeric = scanUnsignedInteger(s) or numeric
+        if index<len(s) and (s[index]=='e' or s[index]=='E'):
+            index+=1
+            numeric = scanInteger(s) and numeric
+        
+        return numeric and (index==len(s))
+```
+
+
+### 19、调整数组顺序使得奇数位于偶数的前面
+
+题目链接：https://leetcode-cn.com/problems/diao-zheng-shu-zu-shun-xu-shi-qi-shu-wei-yu-ou-shu-qian-mian-lcof/
+
+C++:
+```C++
+class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+
+        if(nums.size()<=0) return vector<int>(0);
+
+        int left=0;
+        int right=nums.size()-1;
+        while(left<right){
+            //向后移动left,直到它指向偶数
+            while(left<right && (nums[left]&0x1)!=0){
+                left++;
+            }
+
+            //向前移动right,直到它指向奇数
+            while(left<right && (nums[right]&0x1)==0){
+                right--;
+            }
+            swap(nums[left],nums[right]);
+        }
+        return nums;
+
+    }
+};
+```
+Python:
+```Python
+class Solution:
+    def exchange(self, nums: List[int]) -> List[int]:
+        if len(nums)<=0: return []
+        left=0
+        right=len(nums)-1
+        while left<right:
+            while left<right and nums[left]&0x1!=0:
+                left+=1
+            while left<right and nums[right]&0x1==0:
+                right-=1
+            nums[left],nums[right]=nums[right],nums[left]
+        return nums
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
