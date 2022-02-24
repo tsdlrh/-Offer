@@ -2254,7 +2254,7 @@ public:
 ```
 
 
-### 44、数字序列中某一位的数字
+### 41、数字序列中某一位的数字
 
 题目链接：https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/
 
@@ -2340,7 +2340,7 @@ class Solution:
 ```
 
 
-### 45、把数组排成最小的数
+### 42、把数组排成最小的数
 
 题目链接：https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
 
@@ -2380,7 +2380,7 @@ public:
 };
 ```
 
-### 46、把数字翻译成字符串
+### 43、把数字翻译成字符串
 
 题目链接：https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/
 
@@ -2427,7 +2427,7 @@ class Solution:
 ```
 
 
-### 47、礼物的最大价值
+### 44、礼物的最大价值
 
 题目链接：https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/
 
@@ -2469,7 +2469,7 @@ class Solution:
 ```
 
 
-### 48、最长不含重复字符的子字符串
+### 45、最长不含重复字符的子字符串
 
 题目链接：https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/
 
@@ -2517,7 +2517,7 @@ class Solution:
 ```
 
 
-### 49、丑数
+### 46、丑数
 
 题目链接：https://leetcode-cn.com/problems/chou-shu-lcof/
 
@@ -2557,7 +2557,7 @@ class Solution:
 ```
 
 
-### 50、第一个只出现一次的字符
+### 47、第一个只出现一次的字符
 
 题目链接：https://leetcode-cn.com/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/
 
@@ -2592,7 +2592,7 @@ class Solution:
 ```
 
 
-### 51、数组中的逆序对
+### 48、数组中的逆序对
 
 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
 
@@ -2701,7 +2701,7 @@ class Solution:
         return MergeSort(nums,0,len(nums)-1)
 ```
 
-### 52、两个链表的第一个公共节点
+### 49、两个链表的第一个公共节点
 
 题目链接：https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/
 
@@ -2753,7 +2753,7 @@ public:
 ```
 
 
-### 53、在排序数组中查找数字I
+### 50、在排序数组中查找数字I
 
 题目链接：https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
 
@@ -2813,7 +2813,7 @@ class Solution:
 ```
 
 
-### 54、0~n-1中缺失的数字
+### 51、0~n-1中缺失的数字
 
 题目链接：https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/
 
@@ -2866,7 +2866,7 @@ class Solution:
 ```
 
 
-### 55、二叉树搜索树的第k大节点
+### 52、二叉树搜索树的第k大节点
 
 题目链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/
 
@@ -2902,7 +2902,7 @@ public:
 ```
 
 
-### 56、二叉树的深度
+### 53、二叉树的深度
 
 题目链接：https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/
 
@@ -2926,7 +2926,7 @@ public:
 };
 ```
 
-### 57、平衡二叉树
+### 54、平衡二叉树
 
 题目链接：https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/
 
@@ -2957,7 +2957,7 @@ public:
 ```
 
 
-### 58、数组中数字出现的次数
+### 55、数组中数字出现的次数
 
 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
 
@@ -3010,7 +3010,7 @@ class Solution:
 ```
 
 
-### 59、数组中数字出现的次数II
+### 56、数组中数字出现的次数II
 
 题目链接：https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/
 
@@ -3059,7 +3059,7 @@ class Solution:
 ```
 
 
-### 60、和为s的两个数字
+### 57、和为s的两个数字
 
 题目链接：https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/
 
@@ -3087,7 +3087,7 @@ public:
 ```
 
 
-### 61、和为s的连续正数序列
+### 58、和为s的连续正数序列
 
 题目链接：https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/
 
@@ -3133,7 +3133,7 @@ public:
 ```
 
 
-### 62、翻转单词顺序
+### 59、翻转单词顺序
 
 题目链接：https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/
 
@@ -3167,7 +3167,7 @@ public:
 };
 ```
 
-### 63、左旋转字符串
+### 60、左旋转字符串
 
 题目链接：https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/
 
@@ -3185,7 +3185,7 @@ public:
 ```
 
 
-### 64、滑动窗口的最大值
+### 61、滑动窗口的最大值
 
 题目链接：https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/
 
@@ -3222,7 +3222,7 @@ public:
 };
 ```
 
-### 65、队列的最大值
+### 62、队列的最大值
 
 题目链接：https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/
 
@@ -3271,7 +3271,7 @@ public:
  ```
 
 
-### 66、n个骰子的点数
+### 63、n个骰子的点数
 
 题目链接：https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/
 
@@ -3295,7 +3295,7 @@ public:
 };
 ```
 
-### 67、扑克牌中的顺子
+### 64、扑克牌中的顺子
 
 题目链接：https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/
 
@@ -3360,7 +3360,7 @@ class Solution:
 ```
 
 
-### 68、圆圈中最后剩下的数字
+### 65、圆圈中最后剩下的数字
 
 题目链接：https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/
 
@@ -3381,7 +3381,7 @@ public:
 };
 ```
 
-### 69、股票的最大利润
+### 66、股票的最大利润
 
 题目链接：https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/
 
@@ -3423,7 +3423,7 @@ class Solution:
         return 0 if maxDiff<0 else maxDiff
 ```
 
-### 70、求1+2+3+...+n
+### 67、求1+2+3+...+n
 
 题目链接：https://leetcode-cn.com/problems/qiu-12n-lcof/
 
@@ -3446,7 +3446,7 @@ public:
 ```
 
 
-### 71、不用加减乘除做加法
+### 68、不用加减乘除做加法
 
 题目链接：https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/
 
@@ -3476,7 +3476,7 @@ class Solution:
 ```
 
 
-### 72、构建乘积数组
+### 69、构建乘积数组
 
 题目链接：https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/
 
@@ -3505,7 +3505,7 @@ public:
 ```
 
 
-### 73、把字符串转成整数
+### 70、把字符串转成整数
 
 题目链接：https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/
 
@@ -3559,7 +3559,7 @@ public:
 };
 ```
 
-### 74、二叉搜索树的最近公共祖先
+### 71、二叉搜索树的最近公共祖先
 
 题目链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 
@@ -3589,7 +3589,7 @@ public:
 };
 ```
 
-### 75、二叉树的最近公共祖先
+### 72、二叉树的最近公共祖先
 
 题目链接：https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/
 
@@ -3617,7 +3617,7 @@ public:
 };
 ```
 
-### 76、正则表达式匹配
+### 73、正则表达式匹配
 
 题目链接：https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/
 
@@ -3661,7 +3661,7 @@ public:
 };
 ```
 
-### 77、从上到下打印二叉树
+### 74、从上到下打印二叉树
 
 题目链接：https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
 
