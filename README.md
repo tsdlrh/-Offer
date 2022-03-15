@@ -77,8 +77,468 @@
  * [75、从上到下打印二叉树](#75从上到下打印二叉树)
 
 
+# 常用的查找排序算法
+
+### 查找算法
+C++:
+```
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
 
 
+//一、顺序查找  时间复杂度 O(n)
+int SequenceSearch(vector<int> nums, int val){
+    for(int i=0;i<nums.size();i++){
+        if(nums[i]==val){
+            return i;
+        }
+    }
+    return -1;
+}
+
+//2、二分查找  时间复杂度 O(log2(n))
+int BinarySearch(vector<int> nums, int val){
+    //需要先对数组排序
+    sort(nums.begin(),nums.end());
+
+    int low = 0;
+    int high = nums.size()-1;
+    while(low<=high){
+        int mid = low+(high-low)>>1;
+        if(nums[mid]<val){
+            low = mid+1;
+        }else if(nums[mid]>val){
+            high = mid-1;
+        }else{
+            return mid;
+        }
+    }
+    return -1;
+}
+
+//3、插值查找 时间复杂度O(log2(log2(n)))
+int InsertSearch(vector<int> nums,int val){
+
+    //首先要对数组排序
+    sort(nums.begin(),nums.end());
+    
+    int low = 0;
+    int high = nums.size()-1;
+    while(low<=high){
+        //重点在于Mid的取值,根据val值自适应，更靠近val值
+        int mid = low + (val-nums[low])/(nums[high]-nums[low])*(high-low);
+        if(nums[mid]<val){
+            low = mid+1;
+        }else if(nums[mid]>val){
+            high = mid-1;
+        }else{
+            return mid;
+        }
+    }
+    return -1;
+
+}
+
+//4、斐波那契查找  时间复杂度 O(log2(n))
+//构造一个斐波那契数列
+const int maxsize = 15;
+void Fib(vector<int>& F){
+    F.push_back(1);
+    F.push_back(1);
+    for(int i=2;i<maxsize;i++){
+       F.push_back(F[i-1]+F[i-2]);
+    }
+
+}
+//斐波那契查找法
+int FibSearch(vector<int> nums, int val){
+    
+    //需要先对数组排序
+    sort(nums.begin(),nums.end());
+
+    int low = 0;
+    int high = nums.size()-1;
+
+    vector<int> F;
+    Fib(F);
+
+
+    int k = 0;
+    while(nums.size()>F[k]-1){
+        k++;
+    }
+
+    //将数组nums扩展到f[k]-1的长度
+    vector<int> temp(F[k]-1,0);
+    for(int i=0;i<nums.size();i++){
+        temp[i] = nums[i];
+    }
+
+    for(int j=nums.size();j<F[k]-1;j++){
+        temp[j] = temp[high];
+    }
+
+    while(low<=high){
+        int mid = low+F[k]-1;
+        if(temp[mid]<val){
+            low = mid+1;
+            k-=2;
+        }else if(temp[mid]>val){
+            high = mid-1;
+            k-=1;
+        }else if(mid<=high){
+            return mid;
+        }else{
+            return high;
+        }
+    }
+    return -1;
+}
+
+
+//测试各个函数
+int main(){
+    int n = 0;
+    cin>>n;//输入数组的长度
+    vector<int> vec(n,0);
+    for(int i=0;i<n;i++){
+        cin>>vec[i];//得到输入数组
+    }
+    
+    //待查找的元素值
+    int val = 24;
+
+    //1、顺序查找
+    int res1 = SequenceSearch(vec,val);
+    //2、二分查找
+    int res2 = BinarySearch(vec,val);
+    //3、插值查找
+    int res3 = InsertSearch(vec,val);
+    //4、斐波那契查找
+    int res4 = FibSearch(vec,val);
+
+
+
+    //输出结果
+    cout<<"待查找的元素 "<<val<<" 所在的位置是： "<<res4<<endl;
+
+    return 0;
+
+}
+```
+
+### 排序算法
+C++:
+```
+#include<iostream>
+#include<vector>
+#include<random>
+
+using namespace std;
+
+//1、冒泡排序  时间复杂度O(n^2)  空间复杂度O(1)
+vector<int> bubbleArray(vector<int>& nums){
+    int n = nums.size();
+    for(int i=0;i<n-1;i++){
+        for(int j=1;j<n-i;j++){
+            if(nums[j]<nums[j-1]){
+                int temp = nums[j];
+                nums[j] = nums[j-1];
+                nums[j-1] = temp;
+            }
+        }
+    }
+    return nums;
+}
+
+
+//2、选择排序  时间复杂度O(n^2)  空间复杂度O(1)
+vector<int> selectArray(vector<int>& nums){
+    int n = nums.size()-1;
+    for(int i=0;i<n-1;i++){
+        int min = i;
+        for(int j=i+1;j<n;j++){
+            if(nums[min]>nums[j]){
+                min = j;
+            }
+        }
+        if(min!=i){
+            swap(nums[i],nums[min]);
+        }
+    }
+    return nums;
+}
+
+
+//3、插入排序  时间复杂度O(n^2)  空间复杂度O(n)
+vector<int> insertArray(vector<int>& nums){
+    int n = nums.size();
+    for(int i=1;i<n;i++){
+        int flag = nums[i];
+        int j = i-1;
+        while(j>=0 && flag<nums[j]){
+            nums[j+1] = nums[j];
+            j--;
+        }
+        nums[j+1] = flag;
+    }
+    return nums;
+}
+
+
+//4、希尔排序 时间复杂度O(n^1.3) 
+vector<int> shellArray(vector<int>& nums){
+    int n = nums.size();
+    int h = 1;
+    while(h<n/3){
+        h = 3*h + 1;
+    }
+
+    while(h>0){
+        for(int i=h;i<n;i++){
+            int j = i-h;
+            int flag = nums[i];
+            while(j>=0 && flag<nums[j]){
+                nums[j+h] = nums[j];
+                j = j-h;
+            }
+            nums[j+h] = flag;
+        }
+        h = h/3;
+    }
+    return nums;
+}
+
+
+//5、快速排序 时间复杂度O(nlog2(n))
+int OneSort(vector<int>& nums,int left,int right){
+    int piv = nums[right];
+    int i = left-1;
+    for(int j=left;j<right;j++){
+        if(nums[j]<=piv){
+            i++;
+            swap(nums[i],nums[j]);
+        }
+    }
+    swap(nums[i+1],nums[right]);
+    return i+1;
+}
+
+void Qsort(vector<int>& nums,int left,int right){
+    if(left<right){
+        int mid = OneSort(nums,left,right);
+        Qsort(nums,left,mid-1);
+        Qsort(nums,mid+1,right);
+    }
+}
+
+vector<int> quickArray(vector<int>& nums){
+    Qsort(nums,0,nums.size()-1);
+    return nums;
+}
+
+//6、归并排序  
+void merge(vector<int>& nums,int left,int right,vector<int>& ans){
+     int mid = (right-left)/2+left;
+     int i=left;
+     int j=mid+1;
+     int k=0;
+
+     while(i<=mid && j<=right){
+
+         if(nums[i]<=nums[j]){
+             ans[k++] = nums[i++];
+         }else{
+             ans[k++] = nums[j++];
+         }
+     }
+
+     while(i<=mid){
+         ans[k++] = nums[i++];
+     }
+
+     while(j<=right){
+         ans[k++] = nums[j++];
+     }
+
+     for(int i=left;i<=right;i++){
+         nums[i] = ans[i-left];
+     }
+}
+
+void mergeSort(vector<int>& nums,int left,int right,vector<int>& ans){
+    if(left<right){
+        int mid = (right-left)/2+left;
+        mergeSort(nums,left,mid,ans);
+        mergeSort(nums,mid+1,right,ans);
+        merge(nums,left,right,ans);
+    }
+}
+
+vector<int> mergeArray(vector<int>& nums){
+    vector<int> ans(nums.size());
+    mergeSort(nums,0,nums.size()-1,ans);
+    return nums;
+}
+
+//7、堆排序
+void head_down(int i, int size,vector<int>& nums){
+    while(i<size){
+        int left = 2*i+1;
+        int right = 2*i+2;
+        int max = i;
+
+        if(left<size && nums[left]>nums[max]){
+            max = left;
+        }
+
+        if(right<size && nums[right]>nums[max]){
+            max = right;
+        }
+
+        if(max==i){
+            break;
+        }
+
+        swap(nums[i],nums[max]);
+        i = max;
+    }
+}
+
+
+void maxHeapity(vector<int>& nums,int size){
+    for(int i=size/2-1;i>=0;i--){
+        head_down(i,size,nums);
+    }
+}
+
+vector<int> heapArray(vector<int>& nums){
+    int n = nums.size();
+    maxHeapity(nums,n);
+    swap(nums[0],nums[n-1]);
+    for(int i=n-2;i>0;i--){
+        n--;
+        head_down(0,n,nums);
+        swap(nums[0],nums[i]);
+    }
+    return nums;
+}
+
+
+//8、计数排序
+vector<int> countArray(vector<int>& nums){
+    int n = nums.size();
+    int max = nums[0];
+    int min = nums[0];
+
+    for(int i=1;i<n;i++){
+        if(nums[i]>max){
+            max = nums[i];
+        }
+        if(nums[i]<min){
+            min = nums[i];
+        }
+    }
+
+    vector<int> count(max-min+1,0);
+    for(int i=0;i<n;i++){
+        count[nums[i]-min]++;
+    }
+    int k = 0;
+    for(int i=0;i<max-min+1;i++){
+        while(count[i]--){
+            nums[k++] = i+min;
+        }
+    }
+    return nums;
+}
+
+
+//9、基数排序
+vector<int> baseArray(vector<int>& nums){
+    int n = nums.size();
+    int max = abs(nums[0]);
+    for(int i=1;i<n;i++){
+        if(max<abs(nums[i])){
+            max = abs(nums[i]);
+        }
+    }
+
+    int w = 0;
+    while(max>0){
+        max/=10;
+        w++;
+    }
+
+    int flag = 1;
+    vector<int> ans(n);
+    for(int i=0;i<w;i++){
+        vector<int> bucket(19,0);
+        for(int j=0;j<n;j++){
+            int temp = nums[j]/flag%10+9;
+            bucket[temp]++;
+        }
+        for(int j=1;j<19;j++){
+            bucket[j] += bucket[j-1];
+        }
+        for(int j=n-1;j>=0;j--){
+            int temp = nums[j]/flag%10+9;
+            ans[--bucket[temp]] = nums[j];
+        }
+        nums.swap(ans);
+        flag *= 10;
+    }
+    return nums;
+}
+
+
+
+
+void PrintVec(vector<int> vec){
+    for(int i=0;i<vec.size();i++){
+        cout<<vec[i]<<' ';
+    }
+}
+
+int main(){
+    int n = 0;
+    cin>>n;//输入数组的长度
+    vector<int> vec(n,0);
+    for(int i=0;i<n;i++){
+        cin>>vec[i];
+    }
+
+
+    //输出结果的数组
+    vector<int> res;
+    // res = bubbleArray(vec);
+
+    // res = selectArray(vec);
+
+    // res = insertArray(vec);
+
+    // res = shellArray(vec);
+    
+    // res = quickArray(vec);
+
+    // res = mergeArray(vec);
+
+    // res = heapArray(vec);
+
+    // res = countArray(vec);
+
+    res = baseArray(vec);
+    
+
+    //打印排序好的数组
+    cout<<"===排序的数组==="<<endl;
+    PrintVec(res);
+
+
+}
+```
 
 
 ### 1、数组中重复的数字
