@@ -238,7 +238,7 @@ C++:
 
 using namespace std;
 
-//1、冒泡排序  时间复杂度O(n^2)  空间复杂度O(1)
+//1、冒泡排序  时间复杂度O(n^2)  空间复杂度O(1)  稳定排序
 vector<int> bubbleArray(vector<int>& nums){
     int n = nums.size();
     for(int i=0;i<n-1;i++){
@@ -254,7 +254,7 @@ vector<int> bubbleArray(vector<int>& nums){
 }
 
 
-//2、选择排序  时间复杂度O(n^2)  空间复杂度O(1)
+//2、选择排序  时间复杂度O(n^2)  空间复杂度O(1)  不稳定排序
 vector<int> selectArray(vector<int>& nums){
     int n = nums.size()-1;
     for(int i=0;i<n-1;i++){
@@ -272,7 +272,7 @@ vector<int> selectArray(vector<int>& nums){
 }
 
 
-//3、插入排序  时间复杂度O(n^2)  空间复杂度O(n)
+//3、插入排序  时间复杂度O(n^2)  空间复杂度O(1)  稳定排序
 vector<int> insertArray(vector<int>& nums){
     int n = nums.size();
     for(int i=1;i<n;i++){
@@ -288,7 +288,7 @@ vector<int> insertArray(vector<int>& nums){
 }
 
 
-//4、希尔排序 时间复杂度O(n^1.3) 
+//4、希尔排序 时间复杂度O(n^1.3) 空间复杂度O(1)  不稳定排序
 vector<int> shellArray(vector<int>& nums){
     int n = nums.size();
     int h = 1;
@@ -312,7 +312,7 @@ vector<int> shellArray(vector<int>& nums){
 }
 
 
-//5、快速排序 时间复杂度O(nlog2(n))
+//5、快速排序 时间复杂度O(nlog2(n))  空间复杂度O(nlog2(n))  不稳定排序
 int OneSort(vector<int>& nums,int left,int right){
     int piv = nums[right];
     int i = left-1;
@@ -339,7 +339,7 @@ vector<int> quickArray(vector<int>& nums){
     return nums;
 }
 
-//6、归并排序  
+//6、归并排序  时间复杂度O(nlog2(n))  空间复杂度O(n)  稳定排序
 void merge(vector<int>& nums,int left,int right,vector<int>& ans){
      int mid = (right-left)/2+left;
      int i=left;
@@ -383,7 +383,7 @@ vector<int> mergeArray(vector<int>& nums){
     return nums;
 }
 
-//7、堆排序
+//7、堆排序  时间复杂度O(nlog2(n))  空间复杂度O(1)  不稳定排序
 void head_down(int i, int size,vector<int>& nums){
     while(i<size){
         int left = 2*i+1;
@@ -427,7 +427,7 @@ vector<int> heapArray(vector<int>& nums){
 }
 
 
-//8、计数排序
+//8、计数排序   时间复杂度O(n+k)  空间复杂度O(n+k)  稳定排序
 vector<int> countArray(vector<int>& nums){
     int n = nums.size();
     int max = nums[0];
@@ -456,7 +456,7 @@ vector<int> countArray(vector<int>& nums){
 }
 
 
-//9、基数排序
+//9、基数排序  时间复杂度O(n*m)  空间复杂度O(m)  稳定排序
 vector<int> baseArray(vector<int>& nums){
     int n = nums.size();
     int max = abs(nums[0]);
