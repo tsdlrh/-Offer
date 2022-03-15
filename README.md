@@ -81,7 +81,7 @@
 
 ### 查找算法
 C++:
-```
+```C++
 #include<iostream>
 #include<vector>
 #include<algorithm>
@@ -231,7 +231,7 @@ int main(){
 
 ### 排序算法
 C++:
-```
+```C++
 #include<iostream>
 #include<vector>
 #include<random>
