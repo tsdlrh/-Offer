@@ -456,7 +456,7 @@ vector<int> countArray(vector<int>& nums){
 }
 
 
-//9、基数排序  时间复杂度O(n*m)  空间复杂度O(m)  稳定排序
+//9、基数排序  时间复杂度O(n*m)  空间复杂度O(m)  n为数据的个数，m为数据位数  稳定排序  
 vector<int> baseArray(vector<int>& nums){
     int n = nums.size();
     int max = abs(nums[0]);
