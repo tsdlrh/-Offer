@@ -256,7 +256,7 @@ vector<int> bubbleArray(vector<int>& nums){
 
 //2、选择排序  时间复杂度O(n^2)  空间复杂度O(1)  不稳定排序
 vector<int> selectArray(vector<int>& nums){
-    int n = nums.size()-1;
+    int n = nums.size();
     for(int i=0;i<n-1;i++){
         int min = i;
         for(int j=i+1;j<n;j++){
