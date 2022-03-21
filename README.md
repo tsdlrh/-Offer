@@ -540,6 +540,36 @@ int main(){
 }
 ```
 
+### 笔试编程题：
+### 阿里笔试第二题：求正多边形中，锐角三角形的个数。输入n,n为正多边形边数，输出 m,m为正N边形中，含有的锐角三角形的个数
+### 解题思路：https://leetcode-cn.com/circle/discuss/UY9NxG/
+```C++
+#include<iostream>
+
+using namespace std;
+
+/***
+ *此题的突破点在于：锐角三角形-轴对称，正多边形-轴对称 ->单位圆 ->钝角与锐角的个数 ->奇数与偶数的分类
+ ***/
+int main(){
+    int n = 0;
+    cin>>n;//输入正n边形的边数
+    long res;
+    
+    if(n%2==0){//偶数点
+        res = (long)n*((n-2)/4);
+    }else{//奇数点
+        res = (long)n*(((n-1)/2+1)/2);
+    }
+    if(n%3==0){//去掉重复的等边三角形个数
+        res -= (n/3)*2;
+    }
+    cout<<res<<endl;
+    return 0;
+}
+```
+
+
 
 ### 1、数组中重复的数字
 
