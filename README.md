@@ -541,7 +541,7 @@ int main(){
 ```
 
 ### 笔试编程题：
-### 阿里笔试第二题：求正多边形中，锐角三角形的个数。输入n,n为正多边形边数，输出 m,m为正N边形中，含有的锐角三角形的个数
+### 1、阿里笔试第二题：求正多边形中，锐角三角形的个数。输入n,n为正多边形边数，输出 m,m为正N边形中，含有的锐角三角形的个数
 ### 解题思路：https://leetcode-cn.com/circle/discuss/UY9NxG/
 ```C++
 #include<iostream>
@@ -569,6 +569,200 @@ int main(){
 }
 ```
 
+
+### 2、阿里笔试第三题：扫雷游戏
+### 题目链接：https://leetcode-cn.com/problems/minesweeper/solution/
+```c++
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class Solution{
+public:
+   int dir_x[8] = {0,1,0,-1,1,1,-1,-1};
+   int dir_y[8] = {1,0,-1,0,1,-1,1,-1};
+
+   void dfs(vector<vector<char>>& board, int x, int y){
+       int cnt = 0;//cnt统计与地雷相邻的空方块数目
+       for(int i=0;i<8;i++){
+           int tx = x+dir_x[i];
+           int ty = y+dir_y[i];
+           if(tx<0 || tx>=board.size()||ty<0||ty>=board[0].size()){
+               continue;
+           }
+           
+           cnt += board[tx][ty]=='M';
+       }
+       if(cnt>0){
+           //规则3：如果一个至少与一个地雷相邻的空方块E被挖出，修改它为数字‘1’到‘8’，表示相邻地雷的数量
+           board[x][y] = cnt+'0';
+       }else{
+           //规则2：如果一个没有相邻地雷的空方块E被挖出，修改它为'B',并且所有和其相邻的未挖出的方块
+           //       都应该被递归揭露
+           board[x][y] = 'B';
+           for(int i=0;i<8;i++){
+               int tx = x+dir_x[i];
+               int ty = y+dir_y[i];
+               if(tx<0 || tx>=board.size() || ty<0 || ty>=board[0].size() || board[tx][ty]!='E'){
+                   continue;
+               }
+               dfs(board,tx,ty);
+           }
+
+       }
+   }
+
+   vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click){
+       int x = click[0],y = click[1];
+       if(board[x][y]=='M'){
+           //规则1：如果一个地雷M被挖出，游戏结束，把它修改为X
+           board[x][y] = 'X';
+       }else{
+           dfs(board,x,y);
+       }
+       return board;
+   }
+
+};
+
+int main(){
+    vector<vector<char>> board={{'E','E','E','E','E'},{'E','E','M','E','E'},{'E','E','E','E','E'},{'E','E','E','E','E'}};
+    vector<int> click={3,0};
+    Solution s;
+    vector<vector<char>> res = s.updateBoard(board,click);
+
+    for(int i=0;i<res.size();i++){
+        for(int j=0;j<res[i].size();j++){
+            cout<<res[i][j]<<' ';
+        }
+        cout<<endl;
+    }
+    return 0;
+
+}
+```
+
+### 3、美团笔试第二题：连续子序列的乘积为正
+### 题目链接：https://leetcode-cn.com/circle/discuss/6qBxqq/
+```c++
+#include<iostream>
+#include<vector>
+
+using namespace std;
+int num[5010];
+int main(){
+    int n = 0;
+    int sum = 0;
+    int ans = 0;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>num[i];
+        if(num[i]==1){
+            sum++;//统计了子序列中正数的个数
+        }
+    }
+
+    ans+=sum;//如果有n个正数，则至少有n个正的子序列
+    for(int i=0;i<n;i++){
+        int t = num[i];
+        for(int j=i+1;j<n;j++){
+            t*=num[j];
+            if(t==1){
+                ans++;
+            }
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+```
+
+### 4、美团笔试第三题：服务最多的顾客数
+### 题目链接：https://leetcode-cn.com/circle/discuss/6qBxqq/
+```c++
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int num[50];
+typedef pair<int,int> pi;
+pi a[50],b[50];
+vector<bool> vis;
+int main(){
+    int n,m,ans = 0;
+    cin>>n>>m;
+    vis = vector<bool>(m);
+    for(int i=0;i<n;i++){
+        int p,q;
+        cin>>p>>q;
+        a[i]={p,q};
+        num[p]++;
+        num[q]++;
+    }
+
+    for(int i=0;i<n;i++){
+        int p=a[i].first,q=a[i].second;
+        int sum = 0;
+        sum+=num[p]+num[q];
+        b[i]={sum,i};
+    }
+    sort(b,b+n);
+    for(int i=0;i<n;i++){
+        int k=b[i].second;
+        int p=a[k].first,q=a[k].second;
+        if(!vis[p]&&!vis[q]){
+            ans++;
+            vis[p]=vis[q]=true;
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+```
+
+### 5、美团笔试第四题：最少消耗能量
+### 题目链接：https://leetcode-cn.com/circle/discuss/6qBxqq/
+```c++
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<cstring>
+using namespace std;
+
+const int N = 12;
+const int M = 10005;
+const int INF = 0x3f3f3f3f;
+
+int n,m,bomb[N];
+int dp[M][N];//当前游戏持续第i秒，小美的指针现在指向了第j个房间
+int main(){
+    cin>>n>>m;
+    for(int i=1;i<=m;i++){
+        cin>>bomb[i];
+    }
+    memset(dp,INF,sizeof(dp));
+    dp[1][1] = 0;
+    for(int i=2;i<=m;i++){
+        for(int j=1;j<=n;j++){
+            if(bomb[i]==j) continue;
+            for(int k=1;k<=n;k++){
+                dp[i][j] = min(dp[i][j],dp[i-1][k]+(j==k?0:1));
+
+            }
+        }
+    }
+    int ans = INF;
+    for(int i=1;i<=n;i++){
+        ans = min(ans,dp[m][i]);
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+
+```
 
 
 ### 1、数组中重复的数字
